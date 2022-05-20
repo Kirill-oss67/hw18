@@ -1,0 +1,30 @@
+GET http://localhost:10001/reviews/
+Accept: application/json
+
+###
+
+DELETE http://localhost:10001/reviews/1
+Content-Type: application/json
+
+###
+
+PUT http://localhost:10001/reviews/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "user": "Thomas",
+  "rating": 5,
+  "book_id": 1
+}
+
+###
+
+POST http://localhost:10001/reviews/
+Content-Type: application/json
+
+{
+  "user": "Thomas",
+  "rating": 15,
+  "book_id": 133
+}
