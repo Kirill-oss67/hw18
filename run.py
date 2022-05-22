@@ -5,9 +5,9 @@ from app.config import Config
 # from models import Review, Book
 from app.setup_db import db
 
-from dao.views.director import director_ns
-from dao.views.genre import genre_ns
-from dao.views.movie import movie_ns
+from app.dao.views.director import director_ns
+from app.dao.views.genre import genre_ns
+from app.dao.views.movie import movie_ns
 
 
 # функция создания основного объекта app

@@ -1,5 +1,5 @@
 /.idea
-dao/__pycache__
+app/dao/__pycache__
 helpers/__pycache__
 app/views/__pycache__
 .DS_Store
