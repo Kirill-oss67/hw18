@@ -53,7 +53,6 @@ class BookView(Resource):
         req_json = request.json
         req_json['id'] = id
         movie_service.update_part(req_json)
-
         return '', 204
 
     def delete(self, id):
