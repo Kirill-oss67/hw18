@@ -14,6 +14,15 @@ class MovieService:
     def get_one(self, id):
         return self.movie_dao.get_one(id)
 
+    def get_by_year(self, year):
+        return self.movie_dao.get_by_year(year)
+
+    def get_by_genre(self, genre):
+        return self.movie_dao.get_by_genre(genre)
+
+    def get_by_director(self, director_id):
+        return self.movie_dao.get_by_director(director_id)
+
     def get_all(self):
         return self.movie_dao.get_all()
 
@@ -47,6 +56,5 @@ class MovieService:
 
         self.movie_dao.update(movie)
 
-
-def delete(self):
-    pass
+    def delete(self, id):
+        self.movie_dao.delete(id)
