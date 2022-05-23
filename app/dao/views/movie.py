@@ -1,4 +1,5 @@
 # здесь контроллеры/хендлеры/представления для обработки запросов (flask ручки). сюда импортируются сервисы из пакета service
+import sqlalchemy
 from flask import request
 from app.dao.model.movie import MovieSchema
 from flask_restx import Resource, Namespace
@@ -54,17 +55,14 @@ class MovieView(Resource):
             return 'задано неверное значение', 400
 
     def patch(self, id):
-        try:
-            req_json = request.json
-            req_json['id'] = id
-            movie_service.update_part(req_json)
-            return '', 204
-        except Exception:
-            return 'задано неверное значение', 400
+        req_json = request.json
+        req_json['id'] = id
+        movie_service.update_part(req_json)
+        return '', 204
 
     def delete(self, id):
         try:
             movie_service.delete(id)
             return '', 204
-        except Exception:
+        except sqlalchemy.orm.exc.UnmappedInstanceError:
             return 'задано неверное значение'
