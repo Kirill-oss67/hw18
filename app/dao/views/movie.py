@@ -11,7 +11,7 @@ movie_ns = Namespace('movies')
 
 
 @movie_ns.route('/')
-class BooksView(Resource):
+class MoviesView(Resource):
     def get(self):
         year = request.args.get('year')
         director_id = request.args.get('director_id')
@@ -30,31 +30,41 @@ class BooksView(Resource):
             return movies_schema.dump(all_movies), 200
 
     def post(self):
-        req_json = request.json
-        movie_service.create(req_json)
-
-        return "", 201
+        try:
+            req_json = request.json
+            movie_service.create(req_json)
+            return "", 201
+        except Exception:
+            return 'задано неверное значение', 400
 
 
 @movie_ns.route('/<int:id>')
-class BookView(Resource):
+class MovieView(Resource):
     def get(self, id):
         movie = movie_service.get_one(id)
         return movie_schema.dump(movie), 200
 
     def put(self, id):
-        req_json = request.json
-        req_json['id'] = id
-        movie_service.update(req_json)
-
-        return "", 204
+        try:
+            req_json = request.json
+            req_json['id'] = id
+            movie_service.update(req_json)
+            return "", 204
+        except Exception:
+            return 'задано неверное значение', 400
 
     def patch(self, id):
-        req_json = request.json
-        req_json['id'] = id
-        movie_service.update_part(req_json)
-        return '', 204
+        try:
+            req_json = request.json
+            req_json['id'] = id
+            movie_service.update_part(req_json)
+            return '', 204
+        except Exception:
+            return 'задано неверное значение', 400
 
     def delete(self, id):
-        movie_service.delete(id)
-        return '', 204
+        try:
+            movie_service.delete(id)
+            return '', 204
+        except Exception:
+            return 'задано неверное значение'

@@ -9,14 +9,14 @@ directors_schema = DirectorSchema(many=True)
 
 
 @director_ns.route('/')
-class BooksView(Resource):
+class DirectorsView(Resource):
     def get(self):
         all_directors = director_service.get_all()
         return directors_schema.dump(all_directors), 200
 
 
 @director_ns.route('/<int:id>')
-class BookView(Resource):
+class DirectorView(Resource):
     def get(self, id):
         director = director_service.get_one(id)
         return director_schema.dump(director), 200
