@@ -1,6 +1,6 @@
 # здесь контроллеры/хендлеры/представления для обработки запросов (flask ручки). сюда импортируются сервисы из пакета service
 import sqlalchemy
-from flask import request
+from flask import request, jsonify
 from app.dao.model.movie import MovieSchema
 from flask_restx import Resource, Namespace
 
@@ -34,7 +34,11 @@ class MoviesView(Resource):
         try:
             req_json = request.json
             movie_service.create(req_json)
-            return "", 201
+            id = req_json['id']
+            response = jsonify(req_json)
+            response.status_code = 201
+            response.headers['location'] = f'/movies/{id}'
+            return response
         except Exception:
             return 'задано неверное значение', 400
 
